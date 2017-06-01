@@ -1,31 +1,47 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import R from 'ramda';
 
-const BaseCounter = ({ count, onPlusClick, onMinusClick }) => (
-  <div>
-    <h5><a href="https://redux.js.org/">Redux</a> &amp; <a href="https://facebook.github.io/react/">React</a> Counter</h5>
-    <p>
-      <button onClick={onMinusClick}>-</button>
-      {count}
-      <button onClick={onPlusClick}>+</button>
-    </p>
+const Item = ({title, price, thumbnail}) => (
+  <div className="item">
+    <img src={thumbnail} />
+    <h5>{title}</h5>
+    <p>{price}</p>
   </div>
 );
 
+const BaseCounter = ({ loading, results, onLoading, onReady }) => (
+  <div>
+    <div>
+      <span>
+        {R.map(item => (<Item key={item.id} {...item} />), results.results)}
+      </span>
+    </div>
+  </div>
+);
+
+/*
+<p>{loading? "L" : "R"}</p>
+<button onClick={onLoading}>loading</button>
+<button onClick={onReady}>ready</button>
+*/
+
 BaseCounter.propTypes = {
-  count: PropTypes.number.isRequired,
-  onPlusClick: PropTypes.func.isRequired,
-  onMinusClick: PropTypes.func.isRequired
+  loading: PropTypes.bool.isRequired,
+  results: PropTypes.object.isRequired,
+  onLoading: PropTypes.func.isRequired,
+  onReady: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
-  return { count: state };
+  console.log(state);
+  return { loading: state.loading, results: state.results };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPlusClick: () => dispatch({ type: 'INCREMENT' }),
-    onMinusClick: () => dispatch({ type: 'DECREMENT' })
+    onLoading: () => dispatch({ type: 'LOADING' }),
+    onReady: () => dispatch({ type: 'READY' })
   };
 };
 

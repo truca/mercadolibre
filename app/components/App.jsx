@@ -5,7 +5,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div id="content">
-        <div id="nav">Nav / Sidepanel</div>
+        <div id="nav">mercadolibre</div>
         <input id="search-box" placeholder="¿Qué estás buscando?" type="text" />
         <Counter />
       </div>
