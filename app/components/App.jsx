@@ -1,16 +1,24 @@
 import React, { PropTypes } from 'react';
-import Counter from './Counter';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
+
+import Nav from './parts/Nav';
+import Index from './Index';
+import Search from './Search';
+import Element from './Element';
 
 class App extends React.Component {
   render() {
     return (
-      <div id="content">
-        <div id="nav">mercadolibre</div>
-        <input id="search-box" placeholder="¿Qué estás buscando?" type="text" onChange={this.props.onChange} />
-        <Counter />
-      </div>
+      <Router>
+        <div>
+          <Nav />
+          <Route path="/" component={Index} />
+          <Route path="/itemss" component={Search} />
+          <Route path="/items" component={Element} />
+        </div>
+      </Router>
     );
   }
 }
@@ -27,9 +35,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange: searchText => {
-      dispatch({ type: 'LOADING', searchText })
-    }
+    onChange: event => dispatch({ type: 'LOADING', searchText: event.target.value })
   };
 };
 
