@@ -118,6 +118,7 @@ export default (state = { loading: true, results:
   ]
   }
 }, action) => {
+  console.log(state, action)
   switch (action.type) {
     case 'LOADING':
       return R.merge(state, { loading: true });
