@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchingItems: () => dispatch({ type: 'LOADING' }),
+    fetchingItems: () => dispatch({ type: 'LOADING_ITEMS' }),
     getItemsSuccess: items => dispatch({ type: 'ITEMS_SUCCESS', items }),
     getItemsError: error => dispatch({ type: 'ITEMS_ERROR', error }),
   };

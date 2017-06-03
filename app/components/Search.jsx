@@ -17,13 +17,10 @@ class Search extends React.Component {
   componentWillReceiveProps(nextProps) {
     if(this.props.location.search.split("=")[1] != nextProps.location.search.split("=")[1])
       this.getItems(nextProps.location.search.split("=")[1]);
-    //console.log(nextProps.location.search.split("=")[1]);
-    //this.getItems();
   }
   render() {
     return (
       <div className="index">
-        <h5>Search</h5>
         <ItemList />
       </div>
     );
@@ -43,7 +40,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchingItems: () => dispatch({ type: 'LOADING' }),
+    fetchingItems: () => dispatch({ type: 'LOADING_ITEMS' }),
     getItemsSuccess: items => dispatch({ type: 'ITEMS_SUCCESS', items }),
     getItemsError: error => dispatch({ type: 'ITEMS_ERROR', error }),
   };

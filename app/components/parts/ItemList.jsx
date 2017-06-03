@@ -2,38 +2,31 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import R from 'ramda';
 
-const Item = ({title, price, thumbnail}) => (
-  <div className="item">
-    <img src={thumbnail} />
-    <h5>{title}</h5>
-    <p>{price}</p>
-  </div>
-);
+import Item from "./Item";
 
-const ItemList = ({ loading, items, onLoading, onReady }) => (
+const ItemList = ({ loading_items, items, onLoading, onReady }) => (
   <div>
-    <div>
-      <span>
-        {loading? "L" : R.map(item => (<Item key={item.id} {...item} />), items)}
-      </span>
+    <div className="itemList" >
+      {loading_items?
+        "L" :
+        R.map(item => (<Item key={item.id} {...item} />), items)
+      }
     </div>
   </div>
 );
 
 ItemList.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loading_items: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    loading: state.loading,
+    loading_items: state.loading_items,
     items: state.items
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return { };
-};
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList)

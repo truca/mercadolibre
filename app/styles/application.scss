@@ -1,5 +1,5 @@
 body{
-  margin: 35px 0 0 0;
+  margin: 35px 0 40px 0;
   padding: 0;
 }
 
@@ -40,9 +40,21 @@ button:focus {
   font-size: 14pt;
 }
 
+
+.itemList{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  .item{
+    width: 48%;
+  }
+}
+
 .item{
-  width: 48%;
   margin: 5px 1%;
+  padding: 5px;
   float: left;
   border: 1px solid lightgrey;
   box-sizing: border-box;
