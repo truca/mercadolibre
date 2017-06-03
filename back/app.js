@@ -21,12 +21,48 @@ app.get('/api/items', function (req, res) {
         free_shipping: item.shipping.free_shipping
       }
     }, data.results);
-    res.send(JSON.stringify({author: {}, categories, items}))
+    res.send(JSON.stringify({author: {name: "Ignacio", lastname: "Ureta"}, categories, items}))
   }).catch(error => {
     console.log("Error", error)
     res.send(JSON.stringify(error))
   })
 })
+
+app.get('/api/items/:id', function (req, res) {
+  Promise.all([
+    axios.get("https://api.mercadolibre.com/items/" + req.params.id),
+    axios.get("https://api.mercadolibre.com/items/" + req.params.id + "/description")
+  ]).then(results => {
+    console.log("Element success", results)
+
+    const item = results[0].data;
+    const description = results[1].data;
+
+    res.send(JSON.stringify({
+      author: {
+        name: "Ignacio",
+        lastname: "Ureta"
+      },
+      item: {
+        title: item.title,
+        price: {
+          currency: item.currency_id,
+          amount: Math.floor(item.price / 1),
+          decimals: item.price % 1
+        },
+        picture: item.thumbnail,
+        condition: item.condition,
+        free_shipping: item.shipping.free_shipping,
+        sold_quantity: item.sold_quantity,
+        description: description.plain_text
+      }
+    }))
+  }).catch(error => {
+    console.log("Error on element", error)
+    res.send(JSON.stringify(error))
+  })
+})
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
