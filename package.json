@@ -16,7 +16,8 @@
     "react-dom": "^15.4",
     "react-redux": "~4.3.0",
     "react-router-dom": "^4.1.1",
-    "redux": "~3.2.1"
+    "redux": "~3.2.1",
+    "sass-brunch": "^1.9.2"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2",

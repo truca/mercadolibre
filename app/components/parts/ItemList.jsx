@@ -10,11 +10,11 @@ const Item = ({title, price, thumbnail}) => (
   </div>
 );
 
-const ItemList = ({ loading, results, onLoading, onReady }) => (
+const ItemList = ({ loading, items, onLoading, onReady }) => (
   <div>
     <div>
       <span>
-        {R.map(item => (<Item key={item.id} {...item} />), results.results)}
+        {loading? "L" : R.map(item => (<Item key={item.id} {...item} />), items)}
       </span>
     </div>
   </div>
@@ -22,13 +22,13 @@ const ItemList = ({ loading, results, onLoading, onReady }) => (
 
 ItemList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  results: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     loading: state.loading,
-    results: state.results
+    items: state.items
   };
 };
 

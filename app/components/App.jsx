@@ -14,9 +14,9 @@ class App extends React.Component {
       <Router>
         <div>
           <Nav />
-          <Route path="/" component={Index} />
-          <Route path="/itemss" component={Search} />
-          <Route path="/items" component={Element} />
+          <Route exact path="/" component={Index} />
+          <Route path="/items" component={Search} />
+          <Route path="/items/:id" component={Element} />
         </div>
       </Router>
     );
