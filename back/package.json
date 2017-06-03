@@ -15,6 +15,9 @@
   "author": "Ignacio Ureta",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "axios": "^0.16.1",
+    "express": "^4.15.3",
+    "express-json": "^1.0.0",
+    "ramda": "^0.24.1"
   }
 }
