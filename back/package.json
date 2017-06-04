@@ -1,0 +1,25 @@
+{
+  "name": "mercadolibre-server",
+  "version": "1.0.0",
+  "description": "server for mercadolibre project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mercadolibre",
+    "express",
+    "node"
+  ],
+  "author": "Ignacio Ureta",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-json": "^1.0.0",
+    "ramda": "^0.24.1",
+    "spdy": "^3.4.7"
+  }
+}
