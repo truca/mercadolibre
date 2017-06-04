@@ -1,9 +1,11 @@
-const express = require('express'), app = express(), axios = require("axios"), R = require('ramda')
+const express = require('express'), app = express(), axios = require("axios"), R = require('ramda'), cors = require('cors')
+
+app.use(cors())
 
 app.get('/api/items', function (req, res) {
   //res.send('Hello World: ' + req.query.q)
   axios.get("https://api.mercadolibre.com/sites/MLA/search?q="+req.query.q).then(results => {
-    console.log("Fetched data");
+    console.log("Items success");
     const data = results.data
     let categories = []
     let items = R.map(item => {
@@ -23,7 +25,7 @@ app.get('/api/items', function (req, res) {
     }, data.results);
     res.send(JSON.stringify({author: {name: "Ignacio", lastname: "Ureta"}, categories, items}))
   }).catch(error => {
-    console.log("Error", error)
+    console.log("Error on items", error)
     res.send(JSON.stringify(error))
   })
 })
@@ -63,7 +65,6 @@ app.get('/api/items/:id', function (req, res) {
   })
 })
 
-
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('Mercadolibre app running on port 3000')
 })
