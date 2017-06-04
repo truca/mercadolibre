@@ -13,8 +13,8 @@ const App = ({id, title, price, thumbnail}) => (
     <div>
       <Nav />
       <Route exact path="/" component={Index} />
+      <Route exact path="/items" component={Search} />
       <Route path="/items/:id" component={Element} />
-      <Route path="/items" component={Search} />
     </div>
   </Router>
 );

@@ -8,7 +8,7 @@ const ItemList = ({ loading_items, items, onLoading, onReady }) => (
   <div>
     <div className="itemList" >
       {loading_items?
-        "L" :
+        (<img src="../img/loading.gif" />) :
         R.map(item => (<Item key={item.id} {...item} />), items)
       }
     </div>

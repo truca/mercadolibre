@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const restCall = (method, name, path, requestCallback, successCallback, errorCallback, data = {}) => {
-  console.log("${name} request in ${path}");
+  console.log(`${name} request in ${path}`);
   requestCallback();
   method(path, data).then(results => {
-    console.log("${name} success in ${path}: ", results.data);
+    console.log(`${name} success in ${path}: `, results.data);
     successCallback(results.data)
   }).catch(error => {
-    console.log("${name} error in ${path}: ", error);
+    console.log(`${name} error in ${path}: `, error);
     errorCallback(error);
   });
 }

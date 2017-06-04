@@ -1,6 +1,10 @@
-const express = require('express'), app = express(), axios = require("axios"), R = require('ramda'), cors = require('cors')
+const express = require('express'), app = express(), axios = require("axios"), R = require('ramda'),
+  cors = require('cors'), spdy = require('spdy'), path = require('path'), fs = require('fs')
+
+const port = 3000;
 
 app.use(cors())
+app.use(express.static('public'));
 
 app.get('/api/items', function (req, res) {
   //res.send('Hello World: ' + req.query.q)
@@ -65,6 +69,28 @@ app.get('/api/items/:id', function (req, res) {
   })
 })
 
-app.listen(3000, function () {
+/*app.get('*', (req, res) => {
+    res
+      .status(200)
+      .json({message: 'ok'})
+})*/
+
+const options = {
+    key: fs.readFileSync(__dirname + '/server.key'),
+    cert:  fs.readFileSync(__dirname + '/server.crt')
+}
+
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error)
+      return process.exit(1)
+    } else {
+      console.log('Listening on port: ' + port + '.')
+    }
+  })
+
+/*app.listen(3000, function () {
   console.log('Mercadolibre app running on port 3000')
-})
+})*/
