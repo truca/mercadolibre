@@ -7,7 +7,7 @@ import Item from "./parts/Item";
 
 class Element extends React.Component {
   getItem() {
-    U.get("https://api.mercadolibre.com/items/"+this.props.match.params.id,
+    U.get(`https://localhost:3000/api/items/${this.props.match.params.id}`,
       this.props.fetchingItem,
       this.props.getItemSuccess,
       this.props.getItemError);
@@ -24,9 +24,23 @@ class Element extends React.Component {
     }
   }
   render() {
+    const item = this.props.item;
+    if(Object.keys(item).length == 0) return (<div></div>);
     return (
       <div className="element">
-        <Item {...this.props.item} />
+        <div>
+          <div className="left">
+            <img src={item.picture} />
+            <h5>Descripción del producto</h5>
+            <p>{item.description? item.description : "Producto sin descripción"}</p>
+          </div>
+          <div className="right">
+            <h5>{item.title}</h5>
+            <p>{"$ " + (item.price.amount + item.price.decimals)}</p>
+            <button>Comprar</button>
+          </div>
+
+        </div>
       </div>
     )
   }

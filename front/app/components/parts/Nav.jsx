@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 
 const Nav = withRouter(({ history, onChange }) => (
-  <div id="nav">
+  <nav id="nav">
     <div>
-      <Link to="/"><img src="img/logo.png" /></Link>
+      <Link to="/"><img id="logo" src="../img/logo.png" /></Link>
+      <button><img src="../img/magnifying-glass.png"/></button>
       <input placeholder="¿Qué estás buscando?" type="text" onChange={event => {
         onChange(event.target.value);
         history.push(!!event.target.value? "/items?search=" + event.target.value : "/");
       }} />
     </div>
-  </div>
+  </nav>
 ));
 
 Nav.propTypes = {

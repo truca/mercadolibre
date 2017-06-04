@@ -3,6 +3,7 @@ import ItemList from './parts/ItemList';
 import { connect } from 'react-redux';
 import U from "./../Utils.js";
 import axios from "axios";
+import R from "ramda"
 
 class Index extends React.Component {
   componentDidMount() {
@@ -34,7 +35,25 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchingItems: () => dispatch({ type: 'LOADING_ITEMS' }),
-    getItemsSuccess: items => dispatch({ type: 'ITEMS_SUCCESS', items }),
+    getItemsSuccess: data => {
+      let categories = [];
+      let items = R.map(item => {
+        categories.push(item.category_id);
+        return {
+          id: item.id,
+          title: item.title,
+          price: {
+            currency: item.currency_id,
+            amount: Math.floor(item.price / 1),
+            decimals: item.price % 1
+          },
+          picture: item.thumbnail,
+          condition: item.condition,
+          free_shipping: item.shipping.free_shipping
+        }
+      }, data.results);
+      return dispatch({ type: 'ITEMS_SUCCESS', items: {author: {name: "Ignacio", lastname: "Ureta"}, categories, items} });
+    },
     getItemsError: error => dispatch({ type: 'ITEMS_ERROR', error }),
   };
 };

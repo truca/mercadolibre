@@ -1,10 +1,14 @@
 import React, { PropTypes } from 'react';
 
-const Item = ({id, title, price, thumbnail}) => (
+const Item = ({id, title, price, picture}) => (
   <div className="item">
-    <a href={"/items/"+id}><img src={thumbnail} /></a>
-    <h5>{title}</h5>
-    <p>{price}</p>
+    <div>
+      <a href={"/items/"+id}><img src={picture} /></a>
+    </div>
+    <div>
+      <p className="price" >{"$ " + (price.amount + price.decimals)}</p>
+      <h3>{title}</h3>
+    </div>
   </div>
 );
 
