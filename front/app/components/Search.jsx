@@ -7,7 +7,7 @@ import axios from "axios";
 class Search extends React.Component {
   getItems(searchText) {
     if(!searchText) return;
-    U.get(`https://localhost:3000/api/items?q=${searchText}`,
+    U.get(`http://localhost:3000/api/items?q=${searchText}`,
       this.props.fetchingItems,
       this.props.getItemsSuccess,
       this.props.getItemsError);

@@ -7,7 +7,7 @@ import Item from "./parts/Item";
 
 class Element extends React.Component {
   getItem() {
-    U.get(`https://localhost:3000/api/items/${this.props.match.params.id}`,
+    U.get(`http://localhost:3000/api/items/${this.props.match.params.id}`,
       this.props.fetchingItem,
       this.props.getItemSuccess,
       this.props.getItemError);
